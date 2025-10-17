@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.title {
+  font-family: "Segoe UI", sans-serif;
+  color: #e96c8c;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.cute-gif {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.letter-image {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+}
+
+.animated-mail {
+  position: absolute;
+  height: 150px;
+  width: 200px;
+  transition: .4s;
+}
+
+.body {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 100px 200px;
+  border-color: transparent transparent #f7a8b8 transparent;
+  z-index: 2;
+}
+
+.top-fold {
+  position: absolute;
+  top: 50px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 100px 0 100px;
+  transform-origin: 50% 0%;
+  transition: transform .4s .4s, z-index .2s .4s;
+  border-color: #f4b2c2 transparent transparent transparent;
+  z-index: 2;
+}
+
+.back-fold {
+  position: absolute;
+  bottom: 0;
+  width: 200px;
+  height: 100px;
+  background: #f4b2c2;
+  z-index: 0;
+}
+
+.left-fold {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 0 50px 100px;
+  border-color: transparent transparent transparent #f7a8b8;
+  z-index: 2;
+}
+
+.letter {
+  left: 20px;
+  bottom: 0px;
+  position: absolute;
+  width: 160px;
+  height: 60px;
+  background: #fffafc;
+  z-index: 1;
+  overflow: hidden;
+  transition: height .5s ease .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: #e96c8c;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.shadow {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  width: 400px;
+  height: 30px;
+  transition: .4s;
+  transform: translateX(-50%);
+  border-radius: 100%;
+  background: radial-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.0));
+}
+
+.letter-image.open .animated-mail {
+  transform: translateY(50px);
+}
+
+.letter-image.open .animated-mail .top-fold {
+  transition: transform .4s, z-index .2s;
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.letter-image.open .animated-mail .letter {
+  height: 220px;
+}
+
+.letter-image.open .shadow {
+  width: 250px;
+}
+</style>
+</head>
+<body>
+
+  <div class="title">🌸 Mở phong bì dưới đây 💌 🌸</div>
+  <img class="cute-gif" src="giphy.gif" alt="20/10 gif">
+
+  <div class="letter-image" id="envelope">
+    <div class="animated-mail">
+      <div class="back-fold"></div>
+      <div class="letter">
+        <div class="message" id="message">💌</div>
+      </div>
+      <div class="top-fold"></div>
+      <div class="body"></div>
+      <div class="left-fold"></div>
+    </div>
+    <div class="shadow"></div>
+  </div>
+
+<script>
+  const envelope = document.getElementById('envelope');
+  const message = document.getElementById('message');
+
+  const wishes = [
+    'Chúc bạn luôn xinh đẹp và rạng rỡ 💖',
+    'Chúc ngày 20/10 tràn ngập niềm vui và tiếng cười 🌸',
+    'Chúc bạn luôn hạnh phúc, học giỏi và được yêu thương 🎀',
+    'Một ngày 20/10 thật ngọt ngào và đáng nhớ 💕',
+    'Mong bạn luôn mỉm cười rạng rỡ như hôm nay 🌼',
+    'Chúc bạn gặp nhiều may mắn và thành công 💫',
+    '20/10 thật vui vẻ bên bạn bè và người thân nhé 🎁',
+    'Bạn thật tuyệt vời, hãy luôn tự tin nhé 💐',
+    'Chúc bạn luôn tỏa sáng như ánh mặt trời ☀️',
+    'Chúc bạn có một ngày 20/10 đặc biệt và ý nghĩa 🎉',
+    'Mọi điều tốt đẹp nhất đều dành cho bạn 💖',
+    '10A1 luôn tự hào vì có những bông hoa xinh đẹp như bạn 🌷'
+  ];
+
+  envelope.addEventListener('click', ()=>{
+    envelope.classList.toggle('open');
+    if(envelope.classList.contains('open')){
+      const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+      message.textContent = randomWish;
+    }
+  });
+</script>
+</body>
+</html>
